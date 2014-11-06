@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="utf-8">
   <title>Learning JavaScript</title>
@@ -10,10 +11,43 @@
 </head>
 
 <body>
-  <p>Hello JavaScript</p>
+  <p class="p">Hello JavaScript</p>
+
+  <p class="p" id="p1">So, click me to hide!</p>
+
+  <p class="p">
+    Then, click me to chage our color
+  </p>
+
+  <p class="p">I just stand here, do nothing!</p>
 
   <script charset="utf-8">
-    $('p').hide()
+    function randomColor() {
+      function makeTwo(n) {
+        return n.length == 1 ? 0 + n : n;
+      }
+      var r = parseInt(Math.random() * 255).toString(16);
+      var g = parseInt(Math.random() * 255).toString(16);
+      var b = parseInt(Math.random() * 255).toString(16);
+
+      var color = '#' + makeTwo(r) + makeTwo(g) + makeTwo(b);
+      return color;
+    }
+
+    var index = 2;
+    // start with "#" means I choose an element using id.
+    $('#p1').click(function() {
+      $(this).hide();
+      index--;
+    });
+
+    // start with "." means I choose an element(or a group of elements) using class.
+    // followed by :eq(index) means I choose the index one of a group of elements.
+    $('.p:eq(' + index + ')').click(function() {
+      // start without "." or "#" means I choose an element
+      // (or a group of elements) using element name.
+      $('p').css('color', randomColor());
+    });
   </script>
 </body>
 
