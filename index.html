@@ -8,6 +8,16 @@
   <!-- add two lines, then we get magic -->
   <script src="js/jquery-1.11.0.min.js"></script>
   <script src="js/jquery-migrate-1.2.1.min.js"></script>
+
+  <style media="screen">
+  p {
+    /* little trick to make thing good */
+    /* you can try to remove the following line to see what the difference */
+    /* hope you know how to refresh the explorer correctly */
+    cursor: default;
+
+  }
+  </style>
 </head>
 
 <body>
@@ -22,20 +32,28 @@
   <p class="p">I just stand here, do nothing!</p>
 
   <script charset="utf-8">
+    // a function without parameter
     function randomColor() {
+      // a function with parameter and also is a function within a function
       function makeTwo(n) {
+        // make a hexadecimal number always take two digits
         return n.length == 1 ? 0 + n : n;
       }
+      // get a random hexadecimal number
       var r = parseInt(Math.random() * 255).toString(16);
       var g = parseInt(Math.random() * 255).toString(16);
       var b = parseInt(Math.random() * 255).toString(16);
 
+      // as what I know, color should start with "#"
       var color = '#' + makeTwo(r) + makeTwo(g) + makeTwo(b);
       return color;
     }
 
     var index = 2;
     // start with "#" means I choose an element using id.
+    // in fact, here is a function, but without a name.
+    // we transfer the anonymous function to function click, so he can
+    // figure out what he should do when $('#p1') is clicked .
     $('#p1').click(function() {
       $(this).hide();
       index--;
@@ -48,6 +66,11 @@
       // (or a group of elements) using element name.
       $('p').css('color', randomColor());
     });
+
+    $('p:last').click(function(){
+      console.log('I do something you can not know!');
+    });
+
   </script>
 </body>
 
